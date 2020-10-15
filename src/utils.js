@@ -78,10 +78,11 @@ ${
       workerOptions
     )}, ${fallbackWorkerPath});\n}\n`;
   }
-
+  
+  let publicPath = options.publicPath ? JSON.stringify(options.publicPath) : '__webpack_public_path__';
   return `${
     esModule ? 'export default' : 'module.exports ='
-  } function() {\n  return new ${workerConstructor}(__webpack_public_path__ + ${JSON.stringify(
+  } function() {\n  return new ${workerConstructor}(${publicPath}  + ${JSON.stringify(
     workerFilename
   )}${workerOptions ? `, ${JSON.stringify(workerOptions)}` : ''});\n}\n`;
 }
